@@ -1,4 +1,4 @@
-<%@ page import="com.umfrancisco.*" %>
+<%@ page import="com.umfrancisco.*, java.util.*" %>
 <html>
 	<style>
 		body {
@@ -11,18 +11,24 @@
 		<div>
 			Hello! The time is now <%= new java.util.Date() %>
 		</div>
-		<%! 
+		<form method="post">
+			Id:<input type="text" name="id"/><br>
+			Name:<input type="text" name="name"/><br>
+            <input type="submit" value="Enviar"/>
+        </form>
+		<%
 			Bank bank = new Bank(100);
-			Bank getBank(int id, String name, double amount) {
-				bank.newCustomer(id, name, amount);
-				return bank;
+			
+			String id = request.getParameter("id");
+	        String name = request.getParameter("name");
+			
+			if (id != null && name != null) {
+				bank.newCustomer(id, name, "1000.00");
+			}
+			
+			for (Customer c : bank.print()) {
+				out.println(c+"<br>");
 			}
 		%>
-		<div>
-			<%= getBank(1, "Ana", 1200.00) %>
-		</div>
-		<div>
-			<%= getBank(2, "Beatriz", 3200.00) %>
-		</div>
 	</body>
 </html>

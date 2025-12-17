@@ -11,6 +11,12 @@ public class Bank {
 		this.bankNumber = bankNumber;
 	}
 	
+	public Customer newCustomer(String id, String name, String amount) {
+		Customer customer = new Customer(Integer.parseInt(id), name, Double.parseDouble(amount));
+		this.addCustomer(customer);
+		return customer;
+	}
+	
 	public Customer newCustomer(int id, String name, double amount) {
 		Customer customer = new Customer(id, name, amount);
 		this.addCustomer(customer);
@@ -53,6 +59,10 @@ public class Bank {
 	
 	@Override
 	public String toString() {
-		return bankNumber+", "+customers;
+		return bankNumber+":"+customers;
+	}
+	
+	public List<Customer> print() {
+		return customers;
 	}
 }
